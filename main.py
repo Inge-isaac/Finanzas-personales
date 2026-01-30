@@ -1,45 +1,41 @@
 import tkinter as tk
 from tkinter import *
+from src.ventanas import ventana_ingresos, ventana_fondo_emergencias
 
-
+    
 #Crear Ventana Principal
 window = tk.Tk()
 #Titulo
 window.title("UI, Gestión FInanzas Personales")
-#Dimensiones (Ancho x Altura)
-window.geometry("600x550")
 #Bloquear redimension
 window.resizable(False, False)
 #background
 window.config(bg="darkgray")
 
-#Ventana Ingresos
-def ventana_ingresos():
-    ventana_ingresos = tk.Toplevel(window)#Crear ventana secundaria (Toplevel)
-    ventana_ingresos.title("Ingeresos")
-    ventana_ingresos.geometry("400x350")
-    ventana_ingresos.config(bg="darkgray")
-    
-    #Agregar un widget
-    label = tk.Label(ventana_ingresos, text="Gestion de ingresos", font="25", background="green")
-    label.pack(pady=20)
-    
-#Ventana fondo de emergencia
-def ventana_fondo_emergencias():
-    ventana_fe = tk.Toplevel(window)
-    ventana_fe.title("Fondo de emergencia")
-    ventana_fe.geometry("400x350")
-    ventana_fe.config(bg="darkgray")
-    
-    #Agregar widget
-    label = tk.Label(ventana_fe, text="Gestion fondo de emergencia", font="25", background="green")
-    label.pack(pady=20)
+
+
+#Obtiene el ancho y el alto de la pantalla del dispositivo
+ancho_pantalla = window.winfo_screenwidth()
+alto_pantalla = window.winfo_screenheight()
+
+#Establece el tamano de la ventana
+ancho_ventan = 500
+alto_ventan = 450
+
+#calcula la posicion X e Y pra centrar la ventana
+posicion_x = round(ancho_pantalla /2 - ancho_ventan /2)
+posicion_y = round(alto_pantalla /2 - alto_ventan /2)
+
+#Configura la geometria de la ventana
+window.geometry(f"{ancho_ventan}x{alto_ventan}+{posicion_x}+{posicion_y}")
+
+
+
+
 #######MENU#######
 #Crear barra de menu principal
 menubar = tk.Menu(window)
 window.config(menu=menubar)
-
-
 
 #Crear submenu
 file_menu = tk.Menu(menubar, tearoff=0)
