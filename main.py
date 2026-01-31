@@ -1,35 +1,22 @@
 import tkinter as tk
 from tkinter import *
 from src.ventanas import ventana_ingresos, ventana_fondo_emergencias
+from src.dimensiones import center_window as cw
 
-    
+  
 #Crear Ventana Principal
 window = tk.Tk()
 #Titulo
 window.title("UI, Gestión FInanzas Personales")
 #Bloquear redimension
 window.resizable(False, False)
+#Dimensiones
+window.geometry("")
 #background
-window.config(bg="darkgray")
+window.config(bg="black")
+cw(window,700, 600) #Ejecuta el metodo del modulo dimensiones
 
-
-
-#Obtiene el ancho y el alto de la pantalla del dispositivo
-ancho_pantalla = window.winfo_screenwidth()
-alto_pantalla = window.winfo_screenheight()
-
-#Establece el tamano de la ventana
-ancho_ventan = 500
-alto_ventan = 450
-
-#calcula la posicion X e Y pra centrar la ventana
-posicion_x = round(ancho_pantalla /2 - ancho_ventan /2)
-posicion_y = round(alto_pantalla /2 - alto_ventan /2)
-
-#Configura la geometria de la ventana
-window.geometry(f"{ancho_ventan}x{alto_ventan}+{posicion_x}+{posicion_y}")
-
-
+#Widgets de la ventana principal
 
 
 #######MENU#######
@@ -38,7 +25,7 @@ menubar = tk.Menu(window)
 window.config(menu=menubar)
 
 #Crear submenu
-file_menu = tk.Menu(menubar, tearoff=0)
+file_menu = tk.Menu(menubar, tearoff=0, bg="darkblue", fg="white") #fg(foreground, afecta el corlor de la fuente /texto)
 menubar.add_cascade(label="Acción", menu=file_menu)
 
 #Agregar comandos al submenu Accion
