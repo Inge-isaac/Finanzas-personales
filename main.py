@@ -2,8 +2,10 @@ import tkinter as tk
 from tkinter import *
 from src.ventanas import ventana_ingresos, ventana_fondo_emergencias
 from src.dimensiones import center_window as cw
+from data.conexion import get_db_connection
 
-  
+
+ 
 #Crear Ventana Principal
 window = tk.Tk()
 #Titulo

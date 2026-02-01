@@ -14,13 +14,13 @@ def ventana_ingresos():
     label_instrucciones = tk.Label(root, text="Ingrese la siguiente información:", font="15", background="dimgray", fg="white", justify="right")
     label_instrucciones.grid(row=0, column=0, columnspan=2, pady=5)
     #Agregar widget labels
-    label1 = tk.Label(root, text="Fuente de ingreso:", font="5", background="dimgray", fg="black", justify="left")
+    label1 = tk.Label(root, text="Fuente de ingreso:", font="4", background="dimgray", fg="black", justify="left")
     label1.grid(row=1, column=0, padx=5, pady=5)
-    label2 = tk.Label(root, text="Monto del ingreso:", font="5", background="dimgray", fg="black", justify="left")
+    label2 = tk.Label(root, text="Monto del ingreso:", font="4", background="dimgray", fg="black", justify="left")
     label2.grid(row=2, column=0, padx=5, pady=5)
-    label3 = tk.Label(root, text="Fecha del ingreso (DD/MM/AAAA):", font="5", background="dimgray", fg="black", justify="left")
+    label3 = tk.Label(root, text="Fecha del ingreso (DD/MM/AAAA):", font="4", background="dimgray", fg="black", justify="left")
     label3.grid(row=3, column=0, padx=5, pady=5)
-    label4 = tk.Label(root, text="Categoría del ingreso:", font="5", background="dimgray", fg="black", justify="left")
+    label4 = tk.Label(root, text="Categoría del ingreso:", font="4", background="dimgray", fg="black", justify="left")
     label4.grid(row=4, column=0, padx=5, pady=5)
     
     #Agregar widget entry
