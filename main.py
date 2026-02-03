@@ -16,8 +16,8 @@ window.resizable(False, False)
 #Dimensiones
 window.geometry("")
 #background
-window.config(bg="skyblue")
-cw(window,600, 720) #Ejecuta el metodo del modulo dimensiones
+window.config(bg="steelblue")
+cw(window,600, 550) #Ejecuta el metodo del modulo dimensiones
 
 #Widgets de la ventana principal
 
@@ -41,6 +41,5 @@ file_menu.add_separator()
 file_menu.add_command(label="Salir", command=window.quit)
 
 
-if __name__ == "__main__":
-    tk.mainloop()
+tk.mainloop()
 
