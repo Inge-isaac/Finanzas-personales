@@ -78,6 +78,14 @@ def mostrar_registros():
             for fila in filas:
                 # Insertar al final de la tabla
                 tabla.insert("", "end", values=(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]))
+                if fila[1] < 0:
+                    tabla.item(tabla.get_children()[-1], tags=("negativo",))
+                    tabla.tag_configure("negativo", foreground="orangered", font=("Arial", 8, "bold"))
+                elif fila[1] > 0:
+                    tabla.item(tabla.get_children()[-1], tags=("positivo",))
+                    tabla.tag_configure("positivo", foreground="limegreen", font=("Arial", 8, "bold"))
+            
+              
         except Exception as e:
             print(f"Error al consultar: {e}")
         finally:
@@ -95,34 +103,34 @@ def ventana_registro_ingresos(master):
     root = tk.Toplevel(master)
     root.title("Registrar Ingresos")
     dm.center_window(root, 400, 500)
-    root.config(bg="deepskyblue")
+    root.config(bg="lightsteelblue")
     root.grab_set()  # Hacer que la ventana sea modal
     
 
     #Widgets
     # Configuración con GRID
     # El Label va en column=0 y el Entry en column=1
-    tk.Label(root, bg="black", fg="white", font=("Arial", 12), text="Id de la Cuenta:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
+    tk.Label(root, bg="steelblue", fg="white", font=("Arial", 12), text="Id de la Cuenta:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
     entry_account = tk.Entry(root)
     entry_account.grid(row=0, column=1, pady=5)
 
-    tk.Label(root, bg="black", fg="white", font=("Arial", 12), text="Registro de monto:").grid(row=1, column=0, sticky="e",columnspan=1, padx=5, pady=5)
+    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Registro de monto:").grid(row=1, column=0, sticky="e",columnspan=1, padx=5, pady=5)
     entry_amount = tk.Entry(root)
     entry_amount.grid(row=1, column=1, pady=5)
 
-    tk.Label(root, bg="black", fg="white", font=("Arial", 12), text="Fecha de transacción:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
+    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de transacción:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
     entry_transaction = tk.Entry(root)
     entry_transaction.grid(row=2, column=1, pady=5)
 
-    tk.Label(root, bg="black", fg="white", font=("Arial", 12), text="Descripción de transacción:").grid(row=3, column=0, sticky="e", padx=5, pady=5)
+    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Descripción de transacción:").grid(row=3, column=0, sticky="e", padx=5, pady=5)
     entry_description = tk.Entry(root)
     entry_description.grid(row=3, column=1, pady=5)
 
-    tk.Label(root, bg="black", fg="white", font=("Arial", 12), text="Categoría de transacción:").grid(row=4, column=0, sticky="e", padx=5, pady=5)
+    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Categoría de transacción:").grid(row=4, column=0, sticky="e", padx=5, pady=5)
     entry_category = tk.Entry(root)
     entry_category.grid(row=4, column=1, pady=5)
 
-    tk.Label(root, bg="black", fg="white", font=("Arial", 12), text="Fecha (YYYY-MM-DD):").grid(row=5, column=0, sticky="e", padx=5, pady=5)
+    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha (YYYY-MM-DD):").grid(row=5, column=0, sticky="e", padx=5, pady=5)
     entry_created = tk.Entry(root)
     entry_created.grid(row=5, column=1, pady=5)
 
@@ -157,8 +165,16 @@ def ventana_registro_ingresos(master):
         yscrollcommand=scroll_y.set,
         xscrollcommand=scroll_x.set
     )
-
-    tabla.heading("ID_Acount", text="ID Cuenta")
+    
+    # Configurar columnas
+    tabla.column("ID_Acount", anchor="w", width=50)     
+    tabla.column("Monto", anchor="center", width=70)   
+    tabla.column("Fecha Transacción", anchor="center", width=120)
+    tabla.column("Descripción", anchor="w", width=100)
+    tabla.column("Categoría", anchor="center", width=100)
+    tabla.column("Fecha Creación", anchor="center", width=120)
+    # Configurar encabezados
+    tabla.heading("ID_Acount", text="ID Cuenta", anchor="w")
     tabla.heading("Monto", text="Monto")
     tabla.heading("Fecha Transacción", text="Fecha Transacción")
     tabla.heading("Descripción", text="Descripción")
