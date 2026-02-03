@@ -1,39 +1,37 @@
 import pyodbc
-import os
-import logging
 
-# Configurar logging
-logging.basicConfig(level=logging.INFO)
 
 def get_db_connection():
+     # Parámetros de conexión
+    conn_str = (
+        "Driver={ODBC Driver 17 for SQL Server};"
+        "Server=EL-ZURDO;"
+        "Database=personal_finances;"
+        "UID=isaa;"
+        "PWD=123456;"
+    )
+    
+    
     try:
-        server = os.getenv("DB_SERVER")
-        database = os.getenv("DB_NAME")
-        user = os.getenv("DB_USER")
-        password = os.getenv("DB_PASS")
-
-        # Validar variables de entorno
-        if not all([server, database, user, password]):
-            raise ValueError("Faltan variables de entorno para la conexión a la BD")
-
-        conn = pyodbc.connect(
-            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-            f"SERVER={server};"
-            f"DATABASE={database};"
-            f"UID={user};"
-            f"PWD={password};"
-            "Encrypt=yes;"
-            "TrustServerCertificate=yes;"
-            "Connection Timeout=5;"
-        )
-
-        logging.info("Conexión a SQL Server establecida correctamente")
-        return conn
-
-    except pyodbc.Error as e:
-        logging.error(f"Error de SQL Server: {e}")
-        return None
-
+        #Establecer la conexion
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+        print("Conexión exitosa a la base de datos.")
+        
+        #Ejecutar consulta
+        cursor.execute("SELECT * FROM accounts;")
+        for row  in cursor.fetchall():
+            print(row)
     except Exception as e:
-        logging.error(f"Error general: {e}")
-        return None
+        print(f"Error: {e}")
+        
+    finally: 
+        #Cerrar conexion 
+        if 'connn' in locals() and conn:
+            conn.close()
+            print("Conexion cerrada.")
+        
+get_db_connection()
+            
+            
+        
