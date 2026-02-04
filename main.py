@@ -1,7 +1,7 @@
 import tkinter as tk
 #from tkinter import *
-from src.ventanas import ventana_fondo_emergencias
-from src.ventana_ingresos import ventana_registro_ingresos as vri
+from src.ventanas_ingresos import ventana_registro_ingresos as vri
+from src.ventana_transacciones import ventana_registrar_transaccion as vrt
 from src.dimensiones import center_window as cw
 
 
@@ -32,8 +32,8 @@ file_menu = tk.Menu(menubar, tearoff=0, bg="darkblue", fg="white") #fg(foregroun
 menubar.add_cascade(label="Acción", menu=file_menu, foreground="white")
 
 #Agregar comandos al submenu Accion
-file_menu.add_command(label="Ingresos", command=lambda: vri(window))
-file_menu.add_command(label="Fondo de emergencia", command=ventana_fondo_emergencias)
+file_menu.add_command(label="Presupuestos", command=lambda: vri(window))
+file_menu.add_command(label="Transacciones", command=lambda: vrt(window))
 file_menu.add_command(label="Ahorro", command=None)
 file_menu.add_command(label="Gastos de alimentación", command=None)
 file_menu.add_command(label="Salud", command=None)
