@@ -112,29 +112,28 @@ def ventana_registrar_transaccion(master):
     # El Label va en column=0 y el Entry en column=1
     tk.Label(root, bg="steelblue", fg="white", font=("Arial", 12), text="Id de la Cuenta:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
     entry_account = tk.Entry(root)
-    entry_account.grid(row=0, column=1, pady=5)
+    entry_account.grid(row=0, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Registro de monto:").grid(row=1, column=0, sticky="e",columnspan=1, padx=5, pady=5)
     entry_amount = tk.Entry(root)
-    entry_amount.grid(row=1, column=1, pady=5)
-
+    entry_amount.grid(row=1, column=1, pady=5, sticky="w")
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de transacción:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
     entry_transaction = tk.Entry(root)
-    entry_transaction.grid(row=2, column=1, pady=5)
+    entry_transaction.grid(row=2, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Descripción de transacción:").grid(row=3, column=0, sticky="e", padx=5, pady=5)
     entry_description = tk.Entry(root)
-    entry_description.grid(row=3, column=1, pady=5)
+    entry_description.grid(row=3, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Categoría de transacción:").grid(row=4, column=0, sticky="e", padx=5, pady=5)
     entry_category = tk.Entry(root)
-    entry_category.grid(row=4, column=1, pady=5)
+    entry_category.grid(row=4, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha (YYYY-MM-DD):").grid(row=5, column=0, sticky="e", padx=5, pady=5)
     entry_created = tk.Entry(root)
-    entry_created.grid(row=5, column=1, pady=5)
+    entry_created.grid(row=5, column=1, pady=5, sticky="w")
 
-    btn_registrar = tk.Button(root, text="Registrar Ingreso", command=registrar_ingreso)
+    btn_registrar = tk.Button(root, text="Registrar Transacción", command=ventana_registrar_transaccion)
     btn_registrar.grid(row=6, column=0, columnspan=2, pady=20)
 
 

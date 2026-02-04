@@ -112,27 +112,27 @@ def ventana_registro_ingresos(master):
     # El Label va en column=0 y el Entry en column=1
     tk.Label(root, bg="steelblue", fg="white", font=("Arial", 12), text="Id de usuario:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
     entry_user = tk.Entry(root)
-    entry_user.grid(row=0, column=1, pady=5)
+    entry_user.grid(row=0, column=1, pady=5, sticky="w")
     
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Categoría de presupuesto:").grid(row=1, column=0, sticky="e", padx=5, pady=5)
     entry_category = tk.Entry(root)
-    entry_category.grid(row=1, column=1, pady=5)
+    entry_category.grid(row=1, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Registro de monto:").grid(row=2, column=0, sticky="e",columnspan=1, padx=5, pady=5)
     entry_amount = tk.Entry(root)
-    entry_amount.grid(row=2, column=1, pady=5)
+    entry_amount.grid(row=2, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de inicio:").grid(row=3, column=0, sticky="e", padx=5, pady=5)
     entry_fecha_inicio = tk.Entry(root)
-    entry_fecha_inicio.grid(row=3, column=1, pady=5)
+    entry_fecha_inicio.grid(row=3, column=1, pady=5, sticky="w")
     
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de finalización:").grid(row=4, column=0, sticky="e", padx=5, pady=5)
     entry_fecha_fin = tk.Entry(root)
-    entry_fecha_fin.grid(row=4, column=1, pady=5)
+    entry_fecha_fin.grid(row=4, column=1, pady=5, sticky="w")
     
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de creación:").grid(row=5, column=0, sticky="e", padx=5, pady=5)
     entry_creado = tk.Entry(root)
-    entry_creado.grid(row=5, column=1, pady=5)
+    entry_creado.grid(row=5, column=1, pady=5, sticky="w")
 
     btn_registrar = tk.Button(root, text="Registrar Ingreso", command=registrar_ingreso)
     btn_registrar.grid(row=6, column=0, columnspan=2, pady=20)
