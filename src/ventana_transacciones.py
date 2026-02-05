@@ -187,7 +187,7 @@ def ventana_registrar_transaccion(master):
     scroll_x.config(command=tabla.xview)
 
     
-    root.mainloop()
+    #root.mainloop()
     # Botón para activar la función
 
     #ventana_registro_ingresos()
