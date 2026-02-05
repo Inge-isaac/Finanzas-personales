@@ -10,28 +10,17 @@ def get_db_connection():
         "UID=isaa;"
         "PWD=123456;"
     )
-    
-    
+   
     try:
-        #Establecer la conexion
-        conn = pyodbc.connect(conn_str)
-        cursor = conn.cursor()
+        connection = pyodbc.connect(conn_str)
         print("Conexión exitosa a la base de datos.")
-        
-        #Ejecutar consulta
-        cursor.execute("SELECT * FROM accounts;")
-        for row  in cursor.fetchall():
-            print(row)
-    except Exception as e:
-        print(f"Error: {e}")
-        
-    finally: 
-        #Cerrar conexion 
-        if 'connn' in locals() and conn:
-            conn.close()
-            print("Conexion cerrada.")
-        
+        return connection
+    except pyodbc.Error as e:
+        print("Error al conectar a la base de datos:", e)
+        return None
+
 get_db_connection()
+
             
             
         
