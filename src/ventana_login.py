@@ -1,9 +1,44 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import src.dimensiones as dm
+import pyodbc
+import data.conexion as cnx
 
+#Conexion a la base de datos
+cnx.get_db_connection()
+
+
+#Funcion validacion
+def validar_login():
+    usuario = nombre_entry.get()
+    password = pass_entry.get()
+
+    if not usuario:
+        tk.messagebox.showerror("Error", "Por favor, ingrese un nombre de usuario.")
+        return
+    
+    try: 
+        conn = cnx.get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (username, password) VALUES (?,?)", (usuario, password))
+        conn.commit()
+        tk.messagebox.showinfo("Éxito", "Usuario registrado correctamente.")
+    except Exception as e:
+        tk.messagebox.showerror("Error", f"Error al registrar usuario: {e}")
+         
+        
+        conn.close()
+    except Exception as e:
+        tk.messagebox.showerror("Error", f"Error al conectar a la base de datos: {e}")
+            
 
 def ventana_registro_usuario(master):
+    #variable global
+    global nombre_entry
+    global pass_entry
+    
+    
     root = tk.Toplevel(master)
     root.title("Resgistro de usuario")
     root.resizable(False, False)
@@ -26,46 +61,23 @@ def ventana_registro_usuario(master):
         root,
         text="Nombre de usuario:",
     ).grid(row=0, column=1, padx=5, pady=5, sticky = tk.E)
-    nombre =ttk.Entry(root)
-    nombre.grid(row=0, column=2, padx=5, pady=5)
+    nombre_entry = ttk.Entry(root)
+    nombre_entry.grid(row=0, column=2, padx=5, pady=5)
 
-    #Campo Genero
+    #Campo password
     tk.Label(
         root,
-        text="Género:",
-    ).grid(row=1, column=1, padx=5, pady=5, sticky = tk.E)
-    gender_var = ttk.Combobox(root, 
-                            values=["Masculino", "Femenino", "Otro"],
-                            state ="readonly",
-    )
-    gender_var.grid(row=1, column=2, padx=5, pady=5, sticky=tk.W)
+        text="Password:",
+    ).grid(row=1, column=1, padx=5, pady=5, sticky = tk.NE)
+    pass_entry = ttk.Entry(root, show="*")
+    pass_entry.grid(row=1, column=2, padx=5, pady=5, sticky=tk.NE)
 
-
-    #Campo de altura usuario
-    tk.Label(
-        root,
-        text="Color de ojos (cm):",
-    ).grid(row=2, column=1, padx=5, pady=5, sticky= tk.E)
-    color_ojos = ttk.Combobox(
-        root,
-        values =["Negro", "Marrón", "Azul", "Verde", "Gris", "Otro"],
-        state="readonly",
-    )
-    color_ojos.grid(row=2, column=2, padx=5, pady=5)
-
-
-    #Campo peso usuario
-    tk.Label(
-        root,
-        text="Peso (kg):",
-    ).grid(row=3, column=1, padx=5, pady=5, sticky= tk.E)
-    perso_corporarl = ttk.Entry(root)
-    perso_corporarl.grid(row=3, column=2, padx=5, pady=5)
 
     #Boton registrar usuario
     btn_registrar = tk.Button(
         root,
         text="Registrar Usuario",
+        command=validar_login
     )
     btn_registrar.grid(row=4, column=0, columnspan=3, pady=10)
     
