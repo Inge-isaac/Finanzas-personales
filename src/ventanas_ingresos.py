@@ -79,13 +79,6 @@ def mostrar_registros():
             for fila in filas:
                 # Insertar al final de la tabla
                 tabla.insert("", "end", values=(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]))
-                """ if fila[1] < 0:
-                    tabla.item(tabla.get_children()[-1], tags=("negativo",))
-                    tabla.tag_configure("negativo", foreground="orangered", font=("Arial", 8, "bold"))
-                elif fila[1] > 0:
-                    tabla.item(tabla.get_children()[-1], tags=("positivo",))
-                    tabla.tag_configure("positivo", foreground="limegreen", font=("Arial", 8, "bold")) """
-            
               
         except Exception as e:
             print(f"Error al consultar: {e}")
