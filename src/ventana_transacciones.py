@@ -4,6 +4,12 @@ import pyodbc
 from tkinter import messagebox, ttk as tkk
 import src.dimensiones as dm
 
+#Imporaciones para graficar
+import pandas as pd
+import tkinter as tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
 
 "Configuracion de la conexion a la base de datos"
 
@@ -92,12 +98,34 @@ def mostrar_registros():
             conn.close()
 
 
+
+def ventana_grafico():
+    # Conexión
+    conn = pyodbc.connect('DRIVER={SQL Server};SERVER=EL-ZURDO;DATABASE=personal_finances;UID=isaa;PWD=123456')
+    df = pd.read_sql("SELECT amount, category FROM transactions", conn)
+    conn.close()
+    
+    root = tk.Tk()
+    root.title("Gráfico DB")
+
+    # Crear figura
+    fig = Figure(figsize=(9, 5), dpi=100)
+    ax = fig.add_subplot(111)
+    ax.bar(df['category'], df['amount']) # Ejemplo gráfico
+
+    # Cambia solo el tamaño de las etiquetas del eje X
+    ax.tick_params(axis='x', labelsize=6, labelcolor='blue', ) 
+    # Embeber en Tkinter
+    canvas = FigureCanvasTkAgg(fig, master=root)
+    canvas.draw()
+    canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)         
+
+
 def ventana_registrar_transaccion(master):
     global entry_account, entry_amount, entry_transaction
     global entry_description, entry_category, entry_created
     global tabla
 
-    
     
     #Interfaz grafica para registrar ingresos
     root = tk.Toplevel(master)
@@ -139,6 +167,9 @@ def ventana_registrar_transaccion(master):
 
     btn_consultar = tk.Button(root, text="Actualizar Lista", command=mostrar_registros)
     btn_consultar.grid(row=7, column=0, columnspan=2, pady=10)
+    
+    btn_mostrar_grafico = tk.Button(root, text="Ver Gráfico", command=ventana_grafico)
+    btn_mostrar_grafico.grid(row=7, column=1, columnspan=1, pady=10)
     
     # ===== FRAME PARA LA TABLA =====
     frame_tabla = tk.Frame(root)
