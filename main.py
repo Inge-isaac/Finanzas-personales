@@ -35,8 +35,6 @@ menubar.add_cascade(label="Acción", menu=file_menu, foreground="white")
 file_menu.add_command(label="Presupuestos", command=lambda: vri(window))
 file_menu.add_command(label="Transacciones", command=lambda: vrt(window))
 file_menu.add_command(label="Registro usuario", command=lambda: vru(window))
-file_menu.add_command(label="Gastos de alimentación", command=None)
-file_menu.add_command(label="Salud", command=None)
 file_menu.add_separator()
 file_menu.add_command(label="Salir", command=window.quit)
 
