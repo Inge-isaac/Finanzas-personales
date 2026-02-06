@@ -3,7 +3,7 @@ import tkinter as tk
 from src.ventanas_ingresos import ventana_registro_ingresos as vri
 from src.ventana_transacciones import ventana_registrar_transaccion as vrt
 from src.dimensiones import center_window as cw
-from src.ventana_login import ventana_registro_usuario as vru
+
 
 
  
@@ -34,7 +34,6 @@ menubar.add_cascade(label="Acción", menu=file_menu, foreground="white")
 #Agregar comandos al submenu Accion
 file_menu.add_command(label="Presupuestos", command=lambda: vri(window))
 file_menu.add_command(label="Transacciones", command=lambda: vrt(window))
-file_menu.add_command(label="Registro usuario", command=lambda: vru(window))
 file_menu.add_separator()
 file_menu.add_command(label="Salir", command=window.quit)
 
