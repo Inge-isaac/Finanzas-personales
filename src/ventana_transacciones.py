@@ -2,7 +2,9 @@ import os
 import tkinter as tk
 import pyodbc
 from tkinter import messagebox, ttk as tkk
-import src.utils.center_windows as cw
+from data.conexion import get_db_connection
+from src.utils.center_windows import center_window as cw
+from src.utils.placeholder import PlaceholderEntry  as phe
 
 #Imporaciones para graficar
 import pandas as pd
@@ -13,22 +15,7 @@ from matplotlib.figure import Figure
 
 "Configuracion de la conexion a la base de datos"
 
-server = os.getenv("DB_SERVER", "localhost")
-database = os.getenv("DB_NAME", "personal_finances")
-user = os.getenv("DB_USER", "isaa")
-password = os.getenv("DB_PASSWORD", "123456")
-
-if not all([server, database, user, password]):
-    raise ValueError("Faltan variables de entorno para la conexión a la BD")
-
-conn_str = (
-    "DRIVER={ODBC Driver 17 for SQL Server};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    f"UID={user};"
-    f"PWD={password};"
-    "TrustServerCertificate=yes;"
-)
+conn_str = get_db_connection()
 
 
 #fUNCION PARA REGISTRAR INGRESOS
@@ -68,12 +55,18 @@ def registrar_ingreso():
             conn.close()
             
 
+import os
+import pyodbc
+from tkinter import messagebox
+
+# ...existing code...
+
 def mostrar_registros():
     # Limpiar tabla para evitar duplicados al refrescar
     for fila in tabla.get_children():
         tabla.delete(fila)
         
-#Funcion mostrar registros desde la base de datos
+ #Funcion mostrar registros desde la base de datos
     conn = pyodbc.connect(conn_str, timeout=5)
     if conn:
         cursor = conn.cursor()
@@ -130,7 +123,7 @@ def ventana_registrar_transaccion(master):
     #Interfaz grafica para registrar ingresos
     root = tk.Toplevel(master)
     root.title("Registrar Transaccion")
-    cw.center_window(root, 400, 500)
+    cw(root, 400, 500)
     root.config(bg="lightsteelblue")
     root.grab_set()  # Hacer que la ventana sea modal
     
@@ -161,7 +154,7 @@ def ventana_registrar_transaccion(master):
     entry_created = tk.Entry(root)
     entry_created.grid(row=5, column=1, pady=5, sticky="w")
 
-    btn_registrar = tk.Button(root, text="Registrar Transacción", command=ventana_registrar_transaccion)
+    btn_registrar = tk.Button(root, text="Registrar Transacción", command=registrar_ingreso)
     btn_registrar.grid(row=6, column=0, columnspan=2, pady=20)
 
 
