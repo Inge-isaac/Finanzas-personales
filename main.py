@@ -2,7 +2,7 @@ import tkinter as tk
 #from tkinter import *
 from src.ventanas_ingresos import ventana_registro_ingresos as vri
 from src.ventana_transacciones import ventana_registrar_transaccion as vrt
-from src.dimensiones import center_window as cw
+from src.utils.center_windows import center_window as cw
 
 
 
