@@ -1,28 +1,15 @@
+from logging import root
 import os
 import tkinter as tk
 import pyodbc
 from tkinter import messagebox, ttk as tkk
 import src.utils.center_windows as cw
+from data.conexion import get_db_connection
+from src.utils.placeholder import PlaceholderEntry  as phe
 
 
 "Configuracion de la conexion a la base de datos"
-
-server = os.getenv("DB_SERVER", "localhost")
-database = os.getenv("DB_NAME", "personal_finances")
-user = os.getenv("DB_USER", "isaa")
-password = os.getenv("DB_PASSWORD", "123456")
-
-if not all([server, database, user, password]):
-    raise ValueError("Faltan variables de entorno para la conexión a la BD")
-
-conn_str = (
-    "DRIVER={ODBC Driver 17 for SQL Server};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    f"UID={user};"
-    f"PWD={password};"
-    "TrustServerCertificate=yes;"
-)
+conn_str = get_db_connection()
 
 
 #fUNCION PARA REGISTRAR INGRESOS
@@ -116,7 +103,7 @@ def ventana_registro_ingresos(master):
     entry_amount.grid(row=2, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de inicio:").grid(row=3, column=0, sticky="e", padx=5, pady=5)
-    entry_fecha_inicio = tk.Entry(root)
+    entry_fecha_inicio = phe(root, placeholder="YYY-MM-DD")
     entry_fecha_inicio.grid(row=3, column=1, pady=5, sticky="w")
     
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de finalización:").grid(row=4, column=0, sticky="e", padx=5, pady=5)
