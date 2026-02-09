@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 import pyodbc
 from tkinter import messagebox, ttk as tkk
-import src.dimensiones as dm
+import src.utils.center_windows as cw
 
 
 "Configuracion de la conexion a la base de datos"
@@ -95,7 +95,7 @@ def ventana_registro_ingresos(master):
     #Interfaz grafica para registrar ingresos
     root = tk.Toplevel(master)
     root.title("Registrar Presupuesto")
-    dm.center_window(root, 400, 500)
+    cw.center_window(root, 400, 500)
     root.config(bg="lightsteelblue")
     root.grab_set()  # Hacer que la ventana sea modal
     

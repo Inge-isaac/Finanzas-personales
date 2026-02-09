@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 import pyodbc
 from tkinter import messagebox, ttk as tkk
-import src.dimensiones as dm
+import src.utils.center_windows as cw
 
 #Imporaciones para graficar
 import pandas as pd
@@ -130,7 +130,7 @@ def ventana_registrar_transaccion(master):
     #Interfaz grafica para registrar ingresos
     root = tk.Toplevel(master)
     root.title("Registrar Transaccion")
-    dm.center_window(root, 400, 500)
+    cw.center_window(root, 400, 500)
     root.config(bg="lightsteelblue")
     root.grab_set()  # Hacer que la ventana sea modal
     
