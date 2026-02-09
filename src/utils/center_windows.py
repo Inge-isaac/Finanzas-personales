@@ -14,7 +14,7 @@ def center_window(w, ancho, alto):
     #Configura la geometria(posición), de la ventana
     w.geometry(f"{ancho}x{alto}+{posicion_x}+{posicion_y}")
 
-
+    
 
 
 
