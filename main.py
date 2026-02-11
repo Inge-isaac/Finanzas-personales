@@ -2,7 +2,7 @@ import tkinter as tk
 #from tkinter import *
 from src.ventanas_ingresos import ventana_registro_ingresos as vri
 from src.ventana_transacciones import ventana_registrar_transaccion as vrt
-from src.utils.center_windows import center_window as cw
+from utils.center_windows import center_window as cw
 
 
 
@@ -39,4 +39,5 @@ file_menu.add_command(label="Salir", command=window.quit)
 
 
 tk.mainloop()
+
 
