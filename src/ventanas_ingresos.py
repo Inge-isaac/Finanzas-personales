@@ -3,34 +3,34 @@ import os
 import tkinter as tk
 import pyodbc
 from tkinter import messagebox, ttk as tkk
-import src.utils.center_windows as cw
+from utils.center_windows import center_window as cw
 from data.conexion import get_db_connection
-from src.utils.placeholder import PlaceholderEntry  as phe
+from utils.placeholder import PlaceholderEntry  as phe
+from datetime import datetime
 
 
 "Configuracion de la conexion a la base de datos"
 conn_str = get_db_connection()
 
 
-#fUNCION PARA REGISTRAR INGRESOS
+#FUNCION PARA REGISTRAR INGRESOS
 def registrar_ingreso():
     user = entry_user.get()
     categoria = entry_category.get()
     amount = entry_amount.get()
     fecha_incio = entry_fecha_inicio.get()
     fecha_fin = entry_fecha_fin.get()
-    creado = entry_creado.get()
+    creado = entry_create_at.get
     
     
-    
-    if not user or not categoria or not amount or not fecha_incio or not fecha_fin or not creado:
+    if not user or not categoria or not amount or not fecha_incio or not fecha_fin or not creado :
         messagebox.showerror("Error", "Por favor, complete todos los campos.")
         return
     
     try:
         conn = pyodbc.connect(conn_str, timeout=5)
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO budgets (user_id, category, amount, start_date, end_date, created_at) VALUES (?, ?, ?, ?, ?, ?)", (user, categoria, amount, fecha_incio, fecha_fin, creado))
+        cursor.execute("INSERT INTO budgets(user_id, category, amount, start_date, end_date, created_at) VALUES (?, ?, ?, ?, ?, ?)", (user, categoria, amount, fecha_incio, fecha_fin, creado))
         conn.commit()
         messagebox.showinfo("Éxito", "Ingreso registrado correctamente.")
         
@@ -40,7 +40,8 @@ def registrar_ingreso():
         entry_amount.delete(0, tk.END)
         entry_fecha_inicio.delete(0, tk.END)
         entry_fecha_fin.delete(0, tk.END)
-        entry_creado.delete(0, tk.END)
+        entry_create_at.delete(0, tk.END)
+       
         
     except Exception as e:
         messagebox.showerror("Error", f"No se pudo registrar el ingreso: {e}")
@@ -75,14 +76,14 @@ def mostrar_registros():
 
 def ventana_registro_ingresos(master):
     global entry_user, entry_amount, entry_fecha_inicio
-    global entry_fecha_fin, entry_creado, entry_category
+    global entry_fecha_fin, entry_category, entry_create_at
     global tabla
     
     
     #Interfaz grafica para registrar ingresos
     root = tk.Toplevel(master)
     root.title("Registrar Presupuesto")
-    cw.center_window(root, 400, 500)
+    cw(root, 400, 500)
     root.config(bg="lightsteelblue")
     root.grab_set()  # Hacer que la ventana sea modal
     
@@ -103,17 +104,17 @@ def ventana_registro_ingresos(master):
     entry_amount.grid(row=2, column=1, pady=5, sticky="w")
 
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de inicio:").grid(row=3, column=0, sticky="e", padx=5, pady=5)
-    entry_fecha_inicio = phe(root, placeholder="YYY-MM-DD")
+    entry_fecha_inicio = phe(root, placeholder="YYYY-MM-DD")
     entry_fecha_inicio.grid(row=3, column=1, pady=5, sticky="w")
     
     tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de finalización:").grid(row=4, column=0, sticky="e", padx=5, pady=5)
     entry_fecha_fin = tk.Entry(root)
     entry_fecha_fin.grid(row=4, column=1, pady=5, sticky="w")
     
-    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de creación:").grid(row=5, column=0, sticky="e", padx=5, pady=5)
-    entry_creado = tk.Entry(root)
-    entry_creado.grid(row=5, column=1, pady=5, sticky="w")
-
+    tk.Label(root,bg="steelblue", fg="white", font=("Arial", 12), text="Fecha de creacion").grid(row=5, column=0, sticky="e", padx=5, pady=5)
+    entry_create_at = tk.Entry(root)
+    entry_create_at.grid(row=5, column=1, pady=5, sticky="w")
+    
     btn_registrar = tk.Button(root, text="Registrar Ingreso", command=registrar_ingreso)
     btn_registrar.grid(row=6, column=0, columnspan=2, pady=20)
 
@@ -168,7 +169,7 @@ def ventana_registro_ingresos(master):
     scroll_y.config(command=tabla.yview)
     scroll_x.config(command=tabla.xview)
 
-    
+
     root.mainloop()
     # Botón para activar la función
 

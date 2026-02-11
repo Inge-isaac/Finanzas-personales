@@ -3,8 +3,8 @@ import tkinter as tk
 import pyodbc
 from tkinter import messagebox, ttk as tkk
 from data.conexion import get_db_connection
-from src.utils.center_windows import center_window as cw
-from src.utils.placeholder import PlaceholderEntry  as phe
+from utils.center_windows import center_window as cw
+from utils.placeholder import PlaceholderEntry  as phe
 
 #Imporaciones para graficar
 import pandas as pd
