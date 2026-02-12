@@ -1,10 +1,10 @@
 import tkinter as tk
 #from tkinter import *
 from src.ventanas_ingresos import ventana_registro_ingresos as vri
-from src.ventana_transacciones import ventana_registrar_transaccion as vrt
+from src.ventana_transacciones import VentanaRegistrarTransaccion as vrt
 from utils.center_windows import center_window as cw
+from src.ventana_transacciones import VentanaRegistrarTransaccion
 
- 
 #Crear Ventana Principal
 window = tk.Tk()
 #Titulo
@@ -34,6 +34,7 @@ file_menu.add_command(label="Presupuestos", command=lambda: vri(window))
 file_menu.add_command(label="Transacciones", command=lambda: vrt(window))
 file_menu.add_separator()
 file_menu.add_command(label="Salir", command=window.quit)
+
 
 
 tk.mainloop()
