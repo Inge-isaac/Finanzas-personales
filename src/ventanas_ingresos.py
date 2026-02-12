@@ -13,6 +13,15 @@ from datetime import datetime
 conn_str = get_db_connection()
 
 
+def cargar_hora():
+    ahora = datetime.now()
+    hora = ahora.strftime("%H:%M:%S.%f")[:-3]
+
+    entry_create_at.delete(0, tk.END)
+    entry_create_at.insert(0, hora)
+    entry_create_at.config(state="readonly")
+
+
 #FUNCION PARA REGISTRAR INGRESOS
 def registrar_ingreso():
     user = entry_user.get()
@@ -20,8 +29,7 @@ def registrar_ingreso():
     amount = entry_amount.get()
     fecha_incio = entry_fecha_inicio.get()
     fecha_fin = entry_fecha_fin.get()
-    creado = entry_create_at.get
-    
+    creado = entry_create_at.get()
     
     if not user or not categoria or not amount or not fecha_incio or not fecha_fin or not creado :
         messagebox.showerror("Error", "Por favor, complete todos los campos.")
@@ -30,7 +38,8 @@ def registrar_ingreso():
     try:
         conn = pyodbc.connect(conn_str, timeout=5)
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO budgets(user_id, category, amount, start_date, end_date, created_at) VALUES (?, ?, ?, ?, ?, ?)", (user, categoria, amount, fecha_incio, fecha_fin, creado))
+        ahora = datetime.now()
+        cursor.execute("INSERT INTO budgets(user_id, category, amount, start_date, end_date, created_at) VALUES (?, ?, ?, ?, ?, ?)", (user, categoria, amount, fecha_incio, fecha_fin, ahora))
         conn.commit()
         messagebox.showinfo("Éxito", "Ingreso registrado correctamente.")
         
@@ -72,12 +81,15 @@ def mostrar_registros():
             print(f"Error al consultar: {e}")
         finally:
             conn.close()
+            
+            
+
 
 
 def ventana_registro_ingresos(master):
     global entry_user, entry_amount, entry_fecha_inicio
     global entry_fecha_fin, entry_category, entry_create_at
-    global tabla
+    global tabla, root
     
     
     #Interfaz grafica para registrar ingresos
@@ -169,6 +181,7 @@ def ventana_registro_ingresos(master):
     scroll_y.config(command=tabla.yview)
     scroll_x.config(command=tabla.xview)
 
+    cargar_hora()
 
     root.mainloop()
     # Botón para activar la función
